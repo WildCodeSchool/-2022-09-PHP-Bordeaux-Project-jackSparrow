@@ -1,21 +1,54 @@
 <!doctype html>
-<html lang="fr">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/assets/images/favicon.png">
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="/assets/images/favicon.png">
+	{% block stylesheet %}
 
-    <title>{% block title %}{% endblock %}</title>
+		<link href="{{ ROOT_URL }}/assets/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="/assets/css/style.css">
-    {% block stylesheet %}{% endblock %}
-</head>
+		<link rel="stylesheet" href="/assets/css/_root.css">
+	{% endblock %}
 
-<body>
-    {% block content %}{% endblock %}
-    {% block javascript %}{% endblock %}
-</body>
-</html>
+	<title>
+		{% block title %}jean
+		{% endblock %}
+	</title>
+
+</head></html><body>
 
 
+{% include "_Component/_header.html.twig" %}
+
+
+{% include "_Component/_donate.html.twig" %}
+
+
+<div class="mx-4 background-ws-dark">
+	<div class="row">
+		<div class="col-12 col-md-9 col-xl-10 background-ws-light rounded">
+			{% include "_Component/_breadcrumb.html.twig" %}
+			{% block content %}{% endblock %}
+
+		</div>
+		<div class="col-12 col-md-3 col-xl-2   mt-2">
+			{% include "_Component/_nav.html.twig" %}
+		</div>
+	</div>
+</div>
+{% include "_Component/_footer.html.twig" %}
+
+
+<div class="paperOverlay"></div>
+
+
+{% block javascript %}
+
+	<script src="{{ ROOT_URL }}/assets/js/carrousel.js"></script>
+
+	<script type="text/javascript" src="{{ ROOT_URL }}/assets/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+{% endblock %}</body></html>
