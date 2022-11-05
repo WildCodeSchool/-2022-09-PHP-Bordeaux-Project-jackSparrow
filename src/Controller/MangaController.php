@@ -23,7 +23,7 @@ class MangaController extends AbstractController
             $userManager = new UserManager();
             $user_profile = $userManager->selectOneById($_SESSION['id']);
         } else {
-            $user_profile = 'end';
+            $user_profile = 'en';
         }
 
         $apiManga = new MalClient();
