@@ -1,0 +1,34 @@
+<div class="row">
+	<div class="col-12">
+		<h2>Comments</h2>
+		<form class="form" method="post" action="">
+			<textarea class="area w-100" name="user_comment" placeholder="Write your comment here"></textarea>
+			<button type="submit" class="btn  btn-warning">Post</button>
+		</form>
+
+
+		<div class="container">
+			<div class="row">
+				<div class="col-12 pb-4 overflow-scroll" style="max-height:16em">
+					{% for com in comments %}
+						<div class="card card-body text-light mt-4 text-justify float-left">
+
+							<img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
+							<h4>Jhon Doe</h4>
+							<span>{{ com.date }}</span>
+
+							<br>
+							<p>{{ com.content }}</p>
+
+						</div>
+
+					{% endfor %}
+
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+</div>

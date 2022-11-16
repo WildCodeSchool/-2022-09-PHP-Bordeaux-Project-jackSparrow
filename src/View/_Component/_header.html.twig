@@ -1,0 +1,51 @@
+<nav class="navbar title shadow-xl  rounded   mb-2 mt-2 mx-4" style="background-color:rgba(255,255,255,0.9)">
+
+
+	<div class="container-fluid">
+		<div class="d-flex">
+
+			<div class="border-animate d-flex mx-auto mx-md-0 w-100 background-ws-light p-2 rounded">
+				<p class="focus-animate col-4 rounded text-light  background-ws-dark p-2 display-6 rotate">manga 尊</p>
+
+				<p class="focus-animate col-8 display-5  title  text-center lh-1">
+					jean
+					<br>
+					de
+
+																																																																																																																																																																																												la
+					<br>
+					bour
+				</p>
+
+			</div>
+
+		</div>
+
+
+		<div class="container-flip flex-shrink-1 bd-highlight  title" id="navbarSupportedContent">
+
+			{% block title %}
+				Find
+				<div id="flip" class="display-6">
+					<div>
+						<div>Mangas</div>
+					</div>
+					<div>
+						<div>Animes</div>
+
+					</div>
+					<div>
+						<div>Articles</div>
+
+					</div>
+				</div>
+				<p class="display-5">
+					on our website!
+				</p>
+
+			{% endblock %}
+
+		</div>
+
+		{% include "_Component/_form_register_login.html.twig"  with {'session': session} %}</div>
+</nav>

@@ -1,0 +1,30 @@
+<div class="modal fade" id="Modal_delete_users" aria-labelledby="Modal_delete_users" aria-hidden="true">
+	<div class="modal-dialog ">
+		<div class="modal-content background-ws-dark">
+
+			<div class="modal-header">
+				<h5 class="title">delete user</h5>
+
+				{{ dump(user['id']) }}
+
+
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>are you sure delete user??</p>
+			</div>
+			<div class="modal-footer">
+
+				<a href="/admin/all_users">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">return users list</button>
+				</a>
+				<a href="/admin/delete_user?id={{user.id}}">
+
+
+					<button type="submit" name="user.id" value="{{user.id}}" class="btn btn-danger">Delete user</button>
+
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,65 @@
+<hr>
+<div class="add-article">
+	{% if session.flash.status %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			{{session.flash.status}}
+
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+
+		{% else %}
+
+	{% endif %}
+
+
+	<form method="post">
+		<input type="hidden" value="{{ article.id }}" name="id">
+		<div class="mb-3">
+			<label for="article-title" class="form-label text-light title">Article title</label>
+			<input type="text" class="form-control" id="article-title" name="article-title" value="{{ article.title }}">
+		</div>
+
+		<select class="form-select mb-2" aria-label="Default select example" name="article-featured" value="{{ article.featured }}">
+
+			<option selected name="article-featured-true" value="0">Featured article ?</option>
+
+			<option name="article-featured-true" value="1">True</option>
+
+			<option name="article-featured-false" value="0">False</option>
+
+		</select>
+
+		<div class="mb-3">
+			<label for="article-content" class="form-label text-light title">Article content</label>
+
+			<textarea class="form-control" name="article-content" id="default" rows="12" cols="60">{{ article.content }}</textarea>
+		</div>
+
+		<div class="mb-3">
+			<label for="article-author" class="form-label text-light title">Manga author</label>
+
+			<input type="text" class="form-control" id="article-author" name="article-author" value="{{ article.author }}">
+		</div>
+
+		<div class="mb-3">
+			<label for="article-picture" class="form-label text-light title">Url article picture (<i>optionnal</i>)</label>
+
+			<input type="text" class="form-control" id="article-picture" name="article-picture" value="{{ article.picture }}">
+		</div>
+		<div class="row mx-4 my-2 ">
+			<button type="submit" class="btn btn-warning btn-lg text-light">Submit</button>
+
+		</div>
+
+	</form>
+</div>
+{% block javascript %}
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+	<script>
+		tinymce.init({selector: 'textarea#default'});
+	</script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+{% endblock %}

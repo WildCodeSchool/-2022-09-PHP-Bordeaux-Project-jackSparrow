@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-12">
+        <h2>Comments</h2>
+        <form class="form" method="post" action="">
+            <input type="hidden" value="{{ articles.id }}">
+            <textarea class="area w-100" name="user_comment" placeholder="Write your comment here"></textarea>
+            <button type="submit" class="btn  btn-warning">Post</button>
+        </form>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 pb-4 " style="height: auto">
+                    {% for com in comments %}
+                        <div class="card card-body text-light mt-4 text-justify float-left">
+
+
+                            <img src="{{user.picture ? user.picture : '/assets/images/avatar_default.png'}}" class="rounded" height="50" width="50"/>
+                            <h4>{{ com.name }}</h4>
+
+                            <span>{{ com.date }}</span>
+
+                            <br>
+                            <p>{{ com.content }}</p>
+                            <button onclick="modifyComment()">Modify</button>
+
+                        </div>
+                        <div class="com-form-hidden">
+                            <form id="com-form-hidden" class="form" method="post" action="">
+                                <input type="hidden" value="{{ com.id }}" name="com_id">
+                                <input type="hidden" value="{{ com.users_id }}" name="users_id">
+                                <textarea class="area w-100" name="modified-comment" placeholder=""
+                                          value="{{ com.content }}">{{ com.content }}</textarea>
+                                <button type="submit" class="btn  btn-warning">Modify</button>
+                            </form>
+                        </div>
+
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<script>
+
+    let form = document.getElementsByClassName('com-form-hidden');
+    for (let i = 0; i < form.length; i++) {
+
+        form[i].style.display = "none";
+    }
+
+    function modifyComment() {
+
+        let formBlock = document.getElementsByClassName('com-form-hidden');
+        for (let i = 0; i < formBlock.length; i++) {
+            formBlock[i].style.display = "block";
+        }
+        document.getElementById('com').style.display = "none";
+    }
+
+
+</script>

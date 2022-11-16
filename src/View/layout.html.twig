@@ -1,21 +1,56 @@
 <!doctype html>
-<html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/assets/images/favicon.png">
-
-    <title>{% block title %}{% endblock %}</title>
-
-    <link rel="stylesheet" href="/assets/css/style.css">
-    {% block stylesheet %}{% endblock %}
-</head>
-
-<body>
-    {% block content %}{% endblock %}
-    {% block javascript %}{% endblock %}
-</body>
-</html>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Forum référencement et webmarketing de WebRankInfo : la plus importante communauté francophone SEO"/>
+	<meta property="og:site_name" content="Manga blog of jean de la bour"/>
 
 
+	<meta property="og:image" content="https://cdn.myanimelist.net/images/anime/1764/126627.webp?s=196ea098ac1becd97fc0a4b50a949c2b"/>
+
+
+	<meta property="og:type" content="blog"/>
+	<meta property="og:url" content="https://jean-de-la-bour.herokuapp.com/"/>
+
+	<meta property="og:title" content="Manga blog jean de la bour"/>
+	<meta property="og:description" content="retrouve sur notre blog toutes l'actualite manga,anime, et des articles sur naruto,bleach,monster, top anime"/>
+
+	{% block stylesheet %}
+
+		<link href="{{ ROOT_URL }}/assets/css/bootstrap.min.css" rel="stylesheet">
+
+		<link rel="stylesheet" href="{{ ROOT_URL }}/assets/css/_root.css">
+
+	{% endblock %}
+
+	<title>
+		{% block title %}jean
+		{% endblock %}
+	</title>
+
+</head></html><body style="background:url('{% if anime_show.trailer.images.maximumImageUrl == true or manga_show.images.jpg.largeImageUrl == true %}{{ anime_show.trailer.images.maximumImageUrl }}{{manga_show.images.jpg.largeImageUrl}}{% else %}/assets/images/background-site.jpg{% endif %}') fixed;background-size:cover;background-position:center center;height:100vh;width:100vw;">
+
+
+<div class="margin-desktop rounded shadow">
+	{% include "_Component/_header.html.twig" %}
+
+	<div class="paperOverlay"></div>
+	<div class="row margin-view  mt-4">
+		<div class="col-12 col-md-9 col-xl-10 ps-4 pe-2 background-ws-light  rounded"> {% block content %}{% endblock %}
+
+			</div>
+			<div class="col-12 col-md-3 col-xl-2">
+				{% include "_Component/_nav.html.twig" %}
+			</div>
+
+
+		</div>
+		<div class="mx- rounded shadow">
+			{% include "_Component/_footer.html.twig" %}
+		</div>
+	</div>
+	{% include "_Component/_donate.html.twig" %}
+	{# {% include "_Component/_cookie.html.twig" %} #}
+	{% block javascript %}{% endblock %}
+</body></html>

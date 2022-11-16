@@ -1,0 +1,109 @@
+<div class="sidebar sticky-top d-none d-md-block d-xl-block background-ws-dark d-flex flex-column rounded flex-shrink-0 p-3 w-100">
+
+
+	<a href="/" class="d-flex align-items-center h2  mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+		<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+		<span class="fs-4 title">Sidebar</span>
+	</a>
+	<hr>
+	<ul class="nav text-center  flex-column mb-auto background-ws-light" id="nav">
+		<li class="nav-item ">
+			<a href="{{ ROOT_URL }}/" class="{% if active == '{{ ROOT_URL }}/' %}btn-warning{% endif %} nav-link text-light" aria-current="page">
+
+
+				Home</a>
+		</li>
+		<li class="nav-item">
+			<a href="{{ ROOT_URL }}/anime" class="{% if active == '{{ ROOT_URL }}/anime/' or active == '{{ ROOT_URL }}/anime/show' %}btn-warning{% endif %} nav-link text-light">
+
+
+				Anime</a>
+		</li>
+		<li class="nav-item">
+			<a href="{{ ROOT_URL }}/manga" class="{% if active == '{{ ROOT_URL }}/manga' or active == '{{ ROOT_URL }}/manga/show' %}btn-warning{% endif %} nav-link text-light">
+
+
+				Manga</a>
+		</li>
+		<li class="nav-item">
+			<a href="/articles" class="{% if active == '/articles' or active == '/index.php/articles/show' %}btn-warning{% endif %} nav-link text-light">
+
+
+				Articles</a>
+		</li>
+	</li>
+</ul>
+<hr>
+<div class="background-ws-light p-2">
+	<form action="/anime/search?q={{ query }}" method="get">
+		<input class="form-control me-2" type="text" placeholder="enter anime" name="query" aria-label="Search"><div class="overflow-scroll  title mt-2 p-2  background-ws-dark rounded" style="max-height:7em">
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value="{{animeb}}" id="animeb" class="animeb">
+				<label class=" form-check-label" for=" flexcheckdefault">
+					Anime
+				</label>
+			</div>
+
+			<div class="form-check">
+
+				<input class="form-check-input" type="checkbox" value="tv" name="type" id="flexCheckDefault">
+
+				<label class="form-check-label" for="flexCheckDefault">
+					type|tv
+				</label>
+			</div>
+
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value="movie" name="type" id="flexCheckDefault">
+				<label class="form-check-label" for="flexCheckDefault">
+					type|movie
+				</label>
+			</div>
+
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+				<label class="form-check-label" for="flexCheckDefault">
+					Default checkbox
+				</label>
+			</div>
+
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+				<label class="form-check-label" for="flexCheckDefault">
+					Default checkbox
+				</label>
+			</div>
+		</div>
+		<div class="d-flex flex-column">
+
+			<button class=" btn btn-warning mt-2" type="submit">Search</button>
+		</div>
+		<label for="customRange2" class="form-label title mt-2">Range Score(0 to 10)</label><input type="range" class="form-range" min="0" max="10" name="min_score" value="10" id="customRange2"><p class="title mt-2">status</p>
+		<div class="d-flex flex-row">
+
+
+			<div class="col-6">
+				<div class="form-check">
+
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label text-light" for="flexCheckDefault">
+						finish
+					</label>
+				</div>
+
+			</div>
+			<div class="col-6">
+				<div class="form-check">
+
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label text-light" for="flexCheckDefault">
+
+						on going
+					</label>
+				</div>
+
+
+			</div>
+		</div>
+	</form>
+</div></div>

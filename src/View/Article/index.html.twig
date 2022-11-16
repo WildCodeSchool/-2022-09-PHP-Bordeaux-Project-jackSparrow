@@ -1,0 +1,91 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+	<h1 class="button_all_title display-5 title text-center">Articles</h1>
+
+	<div class="card background-ws-dark">
+		<div class="container-fluid">
+
+			<div class="row">
+
+
+				{% for article in articles %}
+					<div class="card mt-2 col-xl-2 col-md-6 col-sm-6">
+						<div class="d-fluid">
+
+							<div class="row">
+
+								<div class="col-6 col-md-12 col-xl-12">
+									<input type="hidden" class="btn btn-primary position-relative">
+
+										<span class="position-absolute top-20 start-20 translate-middle title p-2 mt-4  background-ws-light  rounded-circle">{{anime_search.results[i].score}}</span>
+
+									</input>
+									<form action="{{ROOT_URL}}/anime/like?id={{anime_list[i].malId}}" method="post">
+
+
+										<input type="hidden" class="btn btn-primary position-relative">
+											<button type="submit" class="btn  position-absolute   end-0" id="like-anime">
+
+
+												<p class="heart btn btn-warning ">♥️</p>
+
+
+											</button>
+
+
+										</input>
+									</form>
+
+
+									<a href="{{ROOT_URL}}/articles/show?id={{article.id}}" data-toggle="tooltip" data-placement="top" title="{{ article.title}}">
+
+										<img src="{{article.picture ? article.picture : "/assets/images/default_article.png"}}" class="card-img-top mt-2" alt="..." style="height:15em">
+
+									</a>
+								</div>
+								<div class="col-6 col-md-12 col-xl-12">
+
+									<div class="card-body">
+										<h5 class="card-title title">{{ article.title|striptags|length > 5 ? article.title|striptags|slice(0, 5) ~ '...' : article.title|striptags }}</h5>
+
+
+										<div class="d-flex flex-row bd-highlight align-items-center mb-3">
+
+											<div class="row">
+												<a href="{{ROOT_URL}}/articles/show?id={{article.id}}" class="text-light btn background-ws-dark">
+
+													{{ article.content|raw|striptags|length > 50 ? article.content|raw|striptags|slice(0, 50) ~ '...' : article.content|raw|striptags }}
+
+												</a>
+												<a href="{{ROOT_URL}}/articles/show?id={{article.id}}" class="text-light btn btn-warning mt-2">Read article:
+
+
+												</a>
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<li>Nothing to display</li>
+				{% endfor %}
+
+
+			</div>
+
+
+		</div>
+
+
+	</div>
+{% endblock %}
+{% block javascript %}
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+{% endblock %}
