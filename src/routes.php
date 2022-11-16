@@ -23,7 +23,7 @@ return [
     // article controller
     'admin/articles' => ['AdminController', 'seeArticles'],
     'articles' => ['ArticlesController', 'articlesMember'],
-    'articles/show' => ['ArticlesController', 'showArticleMember', ['id']],
+    'articles/show' => ['ArticlesController', 'showArticleAndComment', ['id']],
 
     'admin/addArticles' => ['ArticlesController', 'addArticle'],
     'admin/articles/show' => ['ArticlesController', 'showArticle', ['id']],
