@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Model\ArticleManager;
 use App\Model\Cookie;
-use App\Model\Session;
 use App\Model\UserManager;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Request\Top\TopAnimeRequest;
@@ -17,14 +16,13 @@ class HomeController extends AbstractController
      */
     public function index(): string
     {
-        $session = new Session();
-        $id = $session->read('id');
+        if (isset($_SESSION['user_id'])) {
+            // $session->read('user_id');
 
-        if (isset($_SESSION['id'])) {
             $userManager = new UserManager();
-            $user_profile = $userManager->selectOneById($_SESSION['id']);
+            $user_profile = $userManager->selectOneById($_SESSION['user_id']);
         } else {
-            $user_profile = 'end';
+            $user_profile = '';
         }
         $api = new MalClient();
         $topManga = $api->getTopManga(new TopMangaRequest(1, 'manga'));
@@ -39,19 +37,7 @@ class HomeController extends AbstractController
         return $this->twig->render('Home/index.html.twig', ['manga_list' => $manga,
             'anime_list' => $anime,
             'article' => $article,
-            'session' => $_SESSION,
-            'user' => $user_profile,
         ]);
-    }
-
-    public function likeAnime($id)
-    {
-        if ('POST' === $_SERVER['REQUEST_METHOD']) {
-            $cookie = new Cookie();
-            $cookie->setCookie('anime_like', $id);
-
-            header('Location: /');
-        }
     }
 
         public function likeManga($id)
@@ -63,4 +49,14 @@ class HomeController extends AbstractController
                 header('Location: /');
             }
         }
+
+         public function likeAnime($id)
+         {
+             if ('POST' === $_SERVER['REQUEST_METHOD']) {
+                 $cookie = new Cookie();
+                 $cookie->setCookie('anime_like', $id);
+
+                 header('Location: /');
+             }
+         }
 }

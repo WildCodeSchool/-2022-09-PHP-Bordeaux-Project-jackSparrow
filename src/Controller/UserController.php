@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\Bcrypt;
 use App\Model\Session;
 use App\Model\UserManager;
 use Jikan\MyAnimeList\MalClient;
@@ -42,12 +43,23 @@ class UserController extends AbstractController
 
                 // TODO validations (length, format...)
 
+                $bcrypt = new Bcrypt(15);
+
+                $bcrypt->hash($user['password']);
+
                 // if validation is ok, insert and redirection
                 $userManager = new UserManager();
                 $register = $userManager->insert($user);
-                header('Location:/member/user_profile?id='.$register);
 
-                return null;
+                // $session->write('user_mail', $_GET['mail']);
+                $_SESSION['user_id'] = (int) $user['id'];
+
+                $_SESSION['user_password'] = $user['password'];
+                $_SESSION['user_mail'] = $user['mail'];
+
+                $_SESSION['status'] = 'welcome to supra manga site powaa';
+
+                return header('Location:/member/user_profile?id='.$register);
             }
 
             return $this->twig->render('_Modal/register.html.twig');
@@ -57,46 +69,66 @@ class UserController extends AbstractController
         {
             if ('POST' === $_SERVER['REQUEST_METHOD']) {
                 // //  init session
-                $session = new Session();
 
-                $session->delete('mail');
+                session_unset();
+                session_destroy();
 
                 header('Location:/');
             }
         }
 
-         public function show_profile_user(string $id): string
+        public function isLogin()
+        {
+            if ('POST' === $_SERVER['REQUEST_METHOD']) {
+                $credentials = array_map('trim', $_POST);
+
+//      @todo make some controls on email and password fields and if errors, send them to the view
+                $userManager = new UserManager();
+                $user = $userManager->isLogin($credentials['mail'], $credentials['password']);
+
+                if ($credentials['password'] === $user[0]['password']) {
+                    $_SESSION['user_id'] = $user[0]['id'];
+
+                    header('Location: /member/user_profile?id='.$user[0]['id']);
+
+                    exit;
+                }
+
+                header('Location: /');
+            }
+
+            return $this->twig->render('Home/index.html.twig');
+        }
+
+         public function show_profile_user(int $id): string
          {
              if ('GET' === $_SERVER['REQUEST_METHOD']) {
                  //  init session
 
-                 $session = new Session();
-
-                 $userManager = new UserManager();
-                 $user_profile = $userManager->selectOneById($id);
+                 $_SESSION['user_id'] = $id;
 
                  $api = new MalClient();
-
+                 if (isset($_SESSION['flash'])) {
+                     $session['flash'];
+                 } else {
+                     $session = '';
+                 }
                  if (isset($_COOKIE['anime_like'])) {
                      $animeCookie = $_COOKIE['anime_like'];
                      $requestAnime = $api->getAnime(new AnimeRequest($animeCookie));
                  } else {
-                     $requestAnime = 'bla';
+                     $requestAnime = '';
                  }
                  if (isset($_COOKIE['manga_like'])) {
                      $mangaCookie = $_COOKIE['manga_like'];
                      $requestManga = $api->getManga(new MangaRequest($mangaCookie));
                  } else {
-                     $requestManga = 'bla';
+                     $requestManga = '';
                  }
-                 $session->write('id', $_GET['id']);
-                 //  $session->write('mail', $_GET['mail']);
 
                  return $this->twig->render(
                      'Member/user_profile.html.twig',
                      [
-                         'user' => $user_profile,
-                         'session' => $_SESSION,
                          'anime_like' => $requestAnime,
                          'manga_like' => $requestManga,
                      ]
@@ -130,14 +162,13 @@ public function edit_avatar(int $id)
 
     public function edit(int $id): ?string
     {
-        $userManager = new UserManager();
-        $user = $userManager->selectOneById($id);
-
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
             // clean $_POST data
             $user = array_map('trim', $_POST);
 
             // TODO validations (length, format...)
+
+            $userManager = new UserManager();
 
             // if validation is ok, update and redirection
             $userManager->update($user);

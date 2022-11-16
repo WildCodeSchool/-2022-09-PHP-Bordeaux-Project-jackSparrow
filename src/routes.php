@@ -14,17 +14,21 @@ return [
 
     // user controller
     'register_successfull' => ['UserController', 'add'],
+    'login_member' => ['UserController', 'isLogin'],
     'member/user_profile' => ['UserController', 'show_profile_user', ['id']],
     'member/edit_profile' => ['UserController', 'edit', ['id']],
     'member/is_logout' => ['UserController', 'isLogout'],
     'member/edit_avatar' => ['UserController', 'edit_avatar', ['id']],
 
     // article controller
-    'articles' => ['ArticleController', 'index'],
-    'articles/edit' => ['ArticleController', 'edit', ['id']],
-    'articles/show' => ['ArticleController', 'show', ['id']],
-    'articles/add' => ['ArticleController', 'add'],
-    'articles/delete' => ['ArticleController', 'delete'],
+    'admin/articles' => ['AdminController', 'seeArticles'],
+    'articles' => ['ArticlesController', 'articlesMember'],
+    'articles/show' => ['ArticlesController', 'showArticleMember', ['id']],
+
+    'admin/addArticles' => ['ArticlesController', 'addArticle'],
+    'admin/articles/show' => ['ArticlesController', 'showArticle', ['id']],
+    'admin/articles/delete' => ['ArticlesController', 'deleteArticle'],
+    'admin/articles/edit' => ['ArticlesController', 'editArticle', ['id']],
 
     // manga and anime controller
     'manga' => ['MangaController', 'listManga'],

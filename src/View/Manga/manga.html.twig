@@ -5,13 +5,43 @@
 {% endblock %}
 
 {% block content %}
+
 	{% include "_Component/_caroussel.html.twig" with {'article': article} %}
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<li class="page-item">
+				<a class="page-link" href="{{pagination.getPrevUrl}}" aria-label="Previous">
+
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+
+			{% for i in num %}
+				<li class="page-item">
+					<a class="page-link" href="manga/page/{{i.num}}">{{i.num}}</a>
+
+				</li>
+			{% endfor %}
+			<li class="page-item">
+				<a class="page-link" href="{{paginator.getNextUrl}}" aria-label="Next">
+
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
 
 
-	{% for i in items %}{% endfor %}
+	<pre>
+
+    {{ dump(pagerfunta) }}
+
+
+</pre>
 	<div class="container-md mt-4">
 		<div class="title container-fluid p-2">
-			<h1 class="text-center mb-4 display-1">{{block('title')}}</h1>
+			<h1 class="button_all_title text-center mb-4 display-1">{{block('title')}}</h1>
+
 		</div>
 		<div class="row mx-auto">
 
@@ -80,4 +110,10 @@
 			{% endfor %}
 		</div>
 	</div>
+{% endblock %}
+{% block javascript %}
+	<script src="{{ ROOT_URL }}/assets/js/carrousel.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
 {% endblock %}
