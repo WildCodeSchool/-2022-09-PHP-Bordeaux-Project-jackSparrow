@@ -7,37 +7,8 @@
 {% block content %}
 
 	{% include "_Component/_caroussel.html.twig" with {'article': article} %}
-	<nav aria-label="Page navigation example">
-		<ul class="pagination">
-			<li class="page-item">
-				<a class="page-link" href="{{pagination.getPrevUrl}}" aria-label="Previous">
-
-					<span aria-hidden="true">&laquo;</span>
-				</a>
-			</li>
-
-			{% for i in num %}
-				<li class="page-item">
-					<a class="page-link" href="manga/page/{{i.num}}">{{i.num}}</a>
-
-				</li>
-			{% endfor %}
-			<li class="page-item">
-				<a class="page-link" href="{{paginator.getNextUrl}}" aria-label="Next">
-
-					<span aria-hidden="true">&raquo;</span>
-				</a>
-			</li>
-		</ul>
-	</nav>
 
 
-	<pre>
-
-    {{ dump(pagerfunta) }}
-
-
-</pre>
 	<div class="container-md mt-4">
 		<div class="title container-fluid p-2">
 			<h1 class="button_all_title text-center mb-4 display-1">{{block('title')}}</h1>

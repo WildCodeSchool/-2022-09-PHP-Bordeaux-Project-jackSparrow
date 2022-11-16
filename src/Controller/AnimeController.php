@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
- use JasonGrimes\Paginator;
-
 use App\Model\ArticleManager;
 use App\Model\CommentsManager;
 use App\Model\UserManager;
@@ -12,8 +10,6 @@ use Jikan\Request\Anime\AnimeRequest;
 use Jikan\Request\Anime\AnimeVideosRequest;
 use Jikan\Request\Search\AnimeSearchRequest;
 use Jikan\Request\Top\TopAnimeRequest;
-use Pagerfanta\Adapter\ArrayAdapter;
-use Pagerfanta\Pagerfanta;
 
 class AnimeController extends AbstractController
 {
@@ -33,21 +29,11 @@ class AnimeController extends AbstractController
         $topAnime = $apiAnime->getTopAnime(new TopAnimeRequest(1, 'tv'));
         $result = $topAnime->getResults();
 
-
-$totalItems = 1000;
-$itemsPerPage = 50;
-$currentPage = 8;
-$urlPattern = '/foo/page/(:num)';
-
-$paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
-
-
         $articleManager = new ArticleManager();
         $articles = $articleManager->selectAll('title');
 
         return $this->twig->render('Anime/anime.html.twig', ['anime_list' => $result,
             'article' => $articles,
-        'pagination' => $paginator
         ]);
     }
 
