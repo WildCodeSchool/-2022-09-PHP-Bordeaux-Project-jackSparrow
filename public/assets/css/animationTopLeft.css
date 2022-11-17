@@ -1,0 +1,52 @@
+.border-animate-2 {
+    position: relative;
+    width: 110px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.test-animation {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.border-animate-2::after {
+    content: '';
+    position: absolute;
+    background: var(--bs-card);
+    border-radius: 10px;
+    inset: 4px;
+
+}
+
+.border-animate-2::before {
+    content: '';
+    position: absolute;
+    width: 70px;
+    height: 140%;
+    background: linear-gradient(#3FB980, #4AB9DF);
+    animation: animate 4s linear infinite;
+    filter: brightness(1.50);
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .border-animate-2 {
+        width: 190px;
+        height: 140px;
+    }
+}
