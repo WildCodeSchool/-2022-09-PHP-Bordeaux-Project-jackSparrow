@@ -1,51 +1,51 @@
-<nav class="navbar title shadow-xl  rounded   mb-2 mt-2 mx-4" style="background-color:rgba(255,255,255,0.9)">
+<nav class="navbar title shadow-xl bg-body rounded opacity-85  mb-2 mt-2 mx-4">
+
+    <div class="container-fluid">
+
+        <div class="d-flex">
+
+            <div class="d-flex mx-auto mx-md-0 w-100 background-ws-light p-2 rounded border-animate-2">
+                <p class="col-4 rounded text-light  background-ws-dark p-2 display-6 rotate test-animation">manga 尊</p>
+
+                <p class="col-8 display-5  title  text-center lh-1 test-animation">
+                    jean
+                    <br>
+                    de
+
+                    la
+                    <br>
+                    bour
+                </p>
+
+            </div>
+
+        </div>
 
 
-	<div class="container-fluid">
-		<div class="d-flex">
+        <div class="container-flip flex-shrink-1 bd-highlight  title" id="navbarSupportedContent">
 
-			<div class="border-animate d-flex mx-auto mx-md-0 w-100 background-ws-light p-2 rounded">
-				<p class="focus-animate col-4 rounded text-light  background-ws-dark p-2 display-6 rotate">manga 尊</p>
+            {% block title %}
+                Find
+                <div id="flip" class="display-6">
+                    <div>
+                        <div>Mangas</div>
+                    </div>
+                    <div>
+                        <div>Animes</div>
 
-				<p class="focus-animate col-8 display-5  title  text-center lh-1">
-					jean
-					<br>
-					de
+                    </div>
+                    <div>
+                        <div>Articles</div>
 
-																																																																																																																																																																																												la
-					<br>
-					bour
-				</p>
+                    </div>
+                </div>
+                <p class="display-5">
+                    on our website!
+                </p>
 
-			</div>
+            {% endblock %}
 
-		</div>
+        </div>
 
-
-		<div class="container-flip flex-shrink-1 bd-highlight  title" id="navbarSupportedContent">
-
-			{% block title %}
-				Find
-				<div id="flip" class="display-6">
-					<div>
-						<div>Mangas</div>
-					</div>
-					<div>
-						<div>Animes</div>
-
-					</div>
-					<div>
-						<div>Articles</div>
-
-					</div>
-				</div>
-				<p class="display-5">
-					on our website!
-				</p>
-
-			{% endblock %}
-
-		</div>
-
-		{% include "_Component/_form_register_login.html.twig"  with {'session': session} %}</div>
+        {% include "_Component/_form_register_login.html.twig"  with {'session': session} %}</div>
 </nav>

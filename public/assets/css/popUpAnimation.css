@@ -1,0 +1,16 @@
+.animation-donate {
+    animation: slide-in-and-out 2s ease-in-out;
+}
+
+@keyframes slide-in-and-out {
+    0% {
+        transform: translateX(150%);
+    }
+    50% {
+        transform: translateX(-50%);
+
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
