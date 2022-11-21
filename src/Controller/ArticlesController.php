@@ -35,12 +35,12 @@ class ArticlesController extends AbstractController
             if (!isset($title) || (empty(trim($title)))) {
                 $session->setFlash('status', 'wrong title or empty title');
 
-                header('Location: addArticles');
+                return header('Location: addArticles');
             }
             if (!isset($content) || (empty(trim($content)))) {
                 $session->setFlash('status', 'wrong content or empty content');
 
-                header('Location: addArticles');
+                return header('Location: addArticles');
             }
 
             // if validation is ok, insert and redirection
@@ -48,7 +48,7 @@ class ArticlesController extends AbstractController
                 $articleManager = new ArticleManager();
                 $id = $articleManager->insertArticle($item);
 
-                header('Location: articles/show?id=' . $id);
+                return header('Location: articles/show?id=' . $id);
             }
         }
 
@@ -79,18 +79,22 @@ class ArticlesController extends AbstractController
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
             // If a session is set, then you can add or edit a comment. Else you cannot comment.
             if (isset($_SESSION['user_id'])) {
+
                 if (isset($_POST['user_comment'])) {
                     $userComment = $_POST['user_comment'];
                     $usersId = $_SESSION['user_id'];
                     $commentManager->addComment($userComment, $article['id'], $usersId);
                 }
                 if (isset($_POST['modified-comment'])) {
+
                     $this->editComment($_POST['com_id']);
+
                 }
 
                 header('Location: /articles/show?id=' . $id);
             } else {
                 header('Location: /articles/show?id=' . $id);
+
             }
         }
         $comments = $commentManager->getUserComment($article['id']);
@@ -105,10 +109,12 @@ class ArticlesController extends AbstractController
         $commentManager = new CommentsManager();
 
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
+
             // Editing the right comment associated with the right user
-            if ($_SESSION['user_id'] === $_POST['users_id']) {
+            if ($_SESSION['user_id'] === intval($_POST['users_id'])) {
                 $modifiedComment = $_POST['modified-comment'];
                 $commentManager->modifyComment($modifiedComment, $id);
+
             } else {
                 header('Location: /articles/show?id=' . $id);
             }
