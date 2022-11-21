@@ -34,13 +34,8 @@ abstract class AbstractController
         $this->twig->addGlobal('session', $_SESSION);
 
         $userManager = new UserManager();
-
-        $this->user = isset($_SESSION['user_id']) ? $userManager->selectOneById((int) $_SESSION['user_id']) : false;
-        $this->twig->addGlobal('user', $this->user);
-
-        $userManager->isLogin = isset($_SESSION['user_id']);
-
-        $this->twig->addGlobal('user_id', $userManager->isLogin);
+        $userManager->user_profile = isset($_SESSION['user_id']) ? $userManager->selectOneById($_SESSION['user_id']) : false;
+        $this->twig->addGlobal('user', $userManager->user_profile);
 
         // active link for menu sidebar
 
@@ -50,10 +45,10 @@ abstract class AbstractController
 
         //  breadcrumb for all page
 
-        // $breadcrumb = new Breadcrumb();
-        // $breadcrumbMake = $breadcrumb->makeBreadCrumbs();
-
-        // $this->twig->addGlobal('breadcrumb', $breadcrumbMake);
+//        $breadcrumb = new Breadcrumb();
+//        $breadcrumbMake = $breadcrumb->makeBreadCrumbs();
+//
+//        $this->twig->addGlobal('breadcrumb', $breadcrumbMake);
 
         // charging api
     }
