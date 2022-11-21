@@ -29,19 +29,6 @@ If you develop on Windows, you should edit you git configuration to change your 
 
 `git config --global core.autocrlf true`
 
-## Example 
-
-An example (a basic list of items) is provided (you can load the *simple-mvc.sql* file in a test database). The accessible URLs are :
-
-* Home page at [localhost:8000/](localhost:8000/)
-* Items list at [localhost:8000/items](localhost:8000/items)
-* Item details [localhost:8000/items/show?id=:id](localhost:8000/item/show?id=2)
-* Item edit [localhost:8000/items/edit?id=:id](localhost:8000/items/edit?id=2)
-* Item add [localhost:8000/items/add](localhost:8000/items/add)
-* Item deletion [localhost:8000/items/delete?id=:id](localhost:8000/items/delete?id=2)
-
-You can find all these routes declared in the file `src/routes.php`. This is the very same file where you'll add your own new routes to the application.
-
 ## How does URL routing work ?
 
 ![simple_MVC.png](.tours/simple_MVC.png)
@@ -55,7 +42,7 @@ We prepare a little guided tour to start with the simple-MVC.
 
 To take it, you need to install the `Code Tour` extension for Visual Studio Code : [Code Tour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour)
 
-It will give access to a new menu on your IDE where you'll find the different tours about the simple-MVC. Click on play to start one : 
+It will give access to a new menu on your IDE where you'll find the different tours about the simple-MVC. Click on play to start one :
 
 ![menu](https://raw.githubusercontent.com/WildCodeSchool/simple-mvc/codetour/.tours/code_tour_menu.png)
 
@@ -63,9 +50,9 @@ It will give access to a new menu on your IDE where you'll find the different to
 
 ## Run it on docker
 
-If you don't know what is docker, skip this chapter. ;) 
+If you don't know what is docker, skip this chapter. ;)
 
-Otherwise, you probably see, this project is ready to use with docker. 
+Otherwise, you probably see, this project is ready to use with docker.
 
 To build the image, go into the project directory and in your CLI type:
 
@@ -73,9 +60,18 @@ To build the image, go into the project directory and in your CLI type:
 docker build -t simple-mvc-container .
 ```
 
-then, run it to open it on your localhot :
+then, run it to open it on your localhost :
 
 ```
 docker run -i -t --name simple-mvc  -p 80:80 simple-mvc-container
 ```
 
+## Fictional User
+
+With the ``dump.sql``, you have a fictional user who is an administrator.
+
+With this user you can try many features which aren't available with a user who isn't administrator
+
+Mail : jean@jean.fr
+
+Password : jean
