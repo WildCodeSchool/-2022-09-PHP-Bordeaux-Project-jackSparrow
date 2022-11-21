@@ -50,7 +50,7 @@
 					</div>
 
 					<div class="card-body">
-						<h5 class="card-title">{{ manga_list[i].getTitle|striptags|length > 5 ? manga_list[i].getTitle|striptags|slice(0, 5) ~ '...' : manga_list[i].getTitle|striptags }}</h5>
+						<h5 class="card-title">{{ manga_list[i].getTitle|striptags|length > 5 ? manga_list[i].getTitle|striptags|slice(0, 9) ~ '...' : manga_list[i].getTitle|striptags }}</h5>
 
 
 						<div class="d-flex flex-row bd-highlight align-items-center mb-3">

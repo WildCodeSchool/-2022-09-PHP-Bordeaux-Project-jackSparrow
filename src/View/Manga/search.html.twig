@@ -1,0 +1,93 @@
+{% extends "layout.html.twig" %}
+{% block title %}
+    Search Manga
+{% endblock %}
+{% block content %}
+
+
+    <div class="container-fluid mt-4">
+
+        <div class="card background-ws-dark">
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <h2 id="search_animated" class="title text-center display-1">Search:
+                        {{found}}</h2>
+
+                    {% for i in 0..17%}
+                        <div class="card mt-2 col-xl-2 col-md-6 col-sm-6">
+                            <div class="d-fluid">
+
+                                <div class="row">
+
+                                    <div class="col-6 col-md-12 col-xl-12">
+                                        <input type="hidden" class="btn btn-primary position-relative">
+
+                                        <span class="position-absolute top-20 start-20 translate-middle title p-2 mt-4  background-ws-light  rounded-circle">{{manga_search.results[i].score}}</span>
+
+                                        </input>
+                                        <form action="{{ROOT_URL}}/manga/like?id={{manga_list[i].malId}}" method="post">
+
+
+                                            <input type="hidden" class="btn btn-primary position-relative">
+                                            <button type="submit" class="btn  position-absolute   end-0" id="like-anime">
+
+
+                                                <p class="heart btn btn-warning ">♥️</p>
+
+
+                                            </button>
+
+
+                                            </input>
+                                        </form>
+
+
+                                        <a href="show?id={{manga_search.results[i].malId}}" data-toggle="tooltip" data-placement="top" title="{{ manga_search.results[i].getTitle}}">
+                                            <img src="{{manga_search.results[i].getImages}}" class="card-img-top mt-2" alt="..." style="height:15em">
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-12 col-xl-12 ">
+
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ manga_search.results[i].getTitle|striptags|length > 5 ? manga_search.results[i].getTitle|striptags|slice(0, 9) ~ '' : manga_search.results[i].getTitle|striptags }}</h5>
+
+
+                                            <div class="d-flex flex-row bd-highlight align-items-center mb-3">
+
+                                                <div class="row w-100">
+
+
+                                                    <a href="#" class="btn btn-warning">Volume:
+                                                        {{(manga_search.results[i].getVolumes) ? manga_search.results[i].getVolumes: "on going"}}
+
+
+                                                    </a>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+{% endblock %}
+{% block javascript %}
+<script src="/assets/js/search_animated.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+{% endblock %}

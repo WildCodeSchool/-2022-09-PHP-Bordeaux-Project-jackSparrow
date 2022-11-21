@@ -6,6 +6,7 @@ use App\Model\ArticleManager;
 use App\Model\UserManager;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Request\Manga\MangaRequest;
+use Jikan\Request\Search\MangaSearchRequest;
 use Jikan\Request\Top\TopMangaRequest;
 
 class MangaController extends AbstractController
@@ -53,4 +54,27 @@ class MangaController extends AbstractController
              return $this->twig->render('Manga/show.html.twig', ['manga_show' => $data,
              ]);
          }
+
+    // search manga
+    public function searchManga(string $query): ?string
+    {
+        if (isset($_SESSION['id'])) {
+            $userManager = new UserManager();
+            $user_profile = $userManager->selectOneById($_SESSION['id']);
+        } else {
+            $user_profile = 'end';
+        }
+
+        if ('POST' === $_SERVER['REQUEST_METHOD']) {
+            $query = array_map('trim', $_POST);
+        }
+
+        $apiManga = new MalClient();
+
+        $mangaSearchResults = $apiManga->getMangaSearch(new MangaSearchRequest((string) $query));
+
+        return $this->twig->render('Manga/search.html.twig', ['manga_search' => $mangaSearchResults,
+            'found' => $query,
+        ]);
+    }
 }
