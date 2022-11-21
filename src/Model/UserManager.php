@@ -53,11 +53,9 @@ class UserManager extends AbstractManager
 
           public function isLogin(string $mail, string $password): ?array
           {
-              $statement = $this->pdo->prepare('SELECT * FROM '.self::TABLE.' WHERE mail=:mail AND password=:password');
+              $statement = $this->pdo->prepare('SELECT * FROM '.self::TABLE.' WHERE mail=:mail');//' AND password=:password');
 
               $statement->bindValue('mail', $mail, \PDO::PARAM_STR);
-
-              $statement->bindValue('password', $password, \PDO::PARAM_STR);
 
               $statement->execute();
 
