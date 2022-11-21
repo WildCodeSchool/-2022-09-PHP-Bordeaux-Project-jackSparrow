@@ -108,22 +108,19 @@
 
                         <div class="card w-15 mt-2 col-6 ">
                             <h4 class="title text-center mt-3">favorite anime</h4>
-                            <a href="{{ ROOT_URL }}/manga/show?id={{ anime_like.malId }}" class="d-flex justify-content-center ">
+
+                            <div class="d-flex justify-content-center ">
                                 <img src="{{ anime_like.getImages }}" class="" alt="" style="height:15em">
-                            </a>
+                            </div>
+
 
                             <div class="card-body">
                                 <h5 class="card-title">{{ anime_like.getTitle }}</h5>
                                 <div class="d-flex flex-row bd-highlight align-items-center mb-3">
 
-                                    {% if anime_like.getTitle != 'not anime' %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ anime_like.getTitle }}</h5>
 
-                                        <a href="#" class="btn btn-warning">delete anime</a>
-                                    {% else %}
-
-                                    {% endif %}
-
-                                </div>
                             </div>
 
 
@@ -132,36 +129,22 @@
 
                         <div class="card w-15 mt-2 col-6">
                             <h4 class="title text-center mt-3">favorite manga</h4>
-                            <a href="{{ ROOT_URL }}/manga/show?id={{ anime_like.malId }}" class="d-flex justify-content-center">
 
 
-                                <img src="{{ manga_like.getImages }}" class="mt-2" alt="..."
-                                     style="height:15em">
-                            </a>
+                            <div class="d-flex justify-content-center ">
+                                <img src="{{ manga_like.getImages }}" class="" alt="" style="height:15em">
+                            </div>
 
                             <div class="card-body">
                                 <h5 class="card-title">{{ manga_like.getTitle }}</h5>
 
-                                <div class="d-flex flex-row bd-highlight align-items-center mb-3">
 
-
-                                    {% if manga_like.getTitle != 'not manga' %}
-
-
-                                        <a href="#" class="btn btn-warning">
-                                            delete manga
-
-
-                                        </a>
-                                    {% else %}
-                                    {% endif %}
-
-
-                                </div>
                             </div>
 
 
+
                         </div>
+
 
                     </div>
 
@@ -170,7 +153,6 @@
 
             </div>
         </div>
-
 
     {% else %}
         made fucker

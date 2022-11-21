@@ -26,7 +26,7 @@
 
                         </div>
                         <div class="com-form-hidden">
-                            <form id="com-form-hidden" class="form" method="post" action="">
+                            <form class="com-form-hidden{{ com.id }} form" method="post" action="">
                                 <input type="hidden" value="{{ com.id }}" name="com_id">
                                 <input type="hidden" value="{{ com.users_id }}" name="users_id">
                                 <textarea class="area w-100" name="modified-comment" placeholder=""
@@ -50,16 +50,19 @@
 
 <script>
 
-    let form = document.getElementsByClassName('com-form-hidden');
+    let form = document.getElementsByClassName('com-form-hidden{{ com.id }}');
+    //form.style.display = 'none';
     for (let i = 0; i < form.length; i++) {
 
         form[i].style.display = "none";
     }
+    console.log(form)
 
     function modifyComment() {
 
         let formBlock = document.getElementsByClassName('com-form-hidden');
         for (let i = 0; i < formBlock.length; i++) {
+
             formBlock[i].style.display = "block";
         }
         document.getElementById('com').style.display = "none";
