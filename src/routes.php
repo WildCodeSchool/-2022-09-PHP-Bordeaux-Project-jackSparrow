@@ -32,6 +32,7 @@ return [
 
     // manga and anime controller
     'manga' => ['MangaController', 'listManga'],
+    'manga/search' => ['MangaController', 'searchManga', ['query']],
 
     'anime' => ['AnimeController', 'listAnime'],
     'anime/search' => ['AnimeController', 'searchAnime', ['query']],
