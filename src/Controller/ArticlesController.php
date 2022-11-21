@@ -14,9 +14,9 @@ class ArticlesController extends AbstractController
 
         if (isset($_SESSION['user_id'])) {
             $userManager = new UserManager();
-            $user_profile = $userManager->selectOneById($_SESSION['user_id']);
+            $userProfile = $userManager->selectOneById($_SESSION['user_id']);
         } else {
-            $user_profile = '';
+            $userProfile = '';
         }
 
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
@@ -32,15 +32,17 @@ class ArticlesController extends AbstractController
                 $featured = false;
             }
 
-            if (!isset($title) || (empty(trim($title)))) {
-                $session->setFlash('status', 'wrong title or empty title');
-
-                return header('Location: addArticles');
+            if (empty(trim($title))) {
+                $errors[] = 'Titre incorrect';
             }
-            if (!isset($content) || (empty(trim($content)))) {
-                $session->setFlash('status', 'wrong content or empty content');
-
-                return header('Location: addArticles');
+            if (empty(trim($content))) {
+                $errors[] = 'Content incorrect';
+            }
+            if (empty(trim($author))) {
+                $errors[] = 'Auteur incorrect';
+            }
+            if (empty(trim($url))) {
+                $errors[] = 'Url incorrect';
             }
 
             // if validation is ok, insert and redirection
@@ -48,13 +50,11 @@ class ArticlesController extends AbstractController
                 $articleManager = new ArticleManager();
                 $id = $articleManager->insertArticle($item);
 
-                return header('Location: articles/show?id=' . $id);
+                 header('Location: articles/show?id=' . $id);
             }
         }
-
-        return $this->twig->render('Admin/add-articles.html.twig', ['session' => $_SESSION, 'user' => $user_profile]);
+        return $this->twig->render('Admin/add-articles.html.twig', ['session' => $_SESSION, 'user' => $userProfile]);
     }
-
     /**
      * Show informations for a specific article.
      */
@@ -67,11 +67,9 @@ class ArticlesController extends AbstractController
 
         return $this->twig->render('Admin/show-article.html.twig', ['articles' => $article]);
     }
-
     // show article and comment
     public function showArticleAndComment(int $id): string
     {
-
         $articlesManager = new ArticleManager();
         $article = $articlesManager->selectOneById($id);
 
@@ -79,46 +77,36 @@ class ArticlesController extends AbstractController
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
             // If a session is set, then you can add or edit a comment. Else you cannot comment.
             if (isset($_SESSION['user_id'])) {
-
-            if (isset($_POST['user_comment'])) {
-                $userComment = $_POST['user_comment'];
-                $usersId = $_SESSION['user_id'];
-                $commentManager->addComment($userComment, $article['id'], $usersId);
-            }
-            if (isset($_POST['modified-comment'])) {
-                $this->editComment($_POST['com_id']);
-
-            }
-
-            header('Location: /articles/show?id=' . $id);
+                if (isset($_POST['user_comment'])) {
+                    $userComment = $_POST['user_comment'];
+                    $usersId = $_SESSION['user_id'];
+                    $commentManager->addComment($userComment, $article['id'], $usersId);
+                }
+                if (isset($_POST['modified-comment'])) {
+                    $this->editComment($_POST['com_id']);
+                }
+                header('Location: /articles/show?id=' . $id);
             } else {
                 header('Location: /articles/show?id=' . $id);
-
             }
         }
         $comments = $commentManager->getUserComment($article['id']);
-
         return $this->twig->render('Article/show.html.twig', ['articles' => $article, 'comments' => $comments]);
     }
-
     // Editing a comment depending the user
     public function editComment(int $id)
     {
-
         $commentManager = new CommentsManager();
-
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
-
             // Editing the right comment associated with the right user
             if ($_SESSION['user_id'] === $_POST['users_id']) {
-            $modifiedComment = $_POST['modified-comment'];
-            $commentManager->modifyComment($modifiedComment, $id);
+                $modifiedComment = $_POST['modified-comment'];
+                $commentManager->modifyComment($modifiedComment, $id);
             } else {
                 header('Location: /articles/show?id=' . $id);
             }
         }
     }
-
     /**
      * Edit a specific article.
      */
@@ -135,16 +123,12 @@ class ArticlesController extends AbstractController
 
             // if validation is ok, update and redirection
             $articlesManager->editArticle($article);
-
             header('Location: /admin/articles/show?id=' . $id);
-
             // we are redirecting so we don't want any content rendered
             return null;
         }
-
         return $this->twig->render('Admin/edit.html.twig', ['article' => $article]);
     }
-
     /**
      * Delete a specific article.
      */
@@ -158,13 +142,11 @@ class ArticlesController extends AbstractController
             header('Location:/admin/articles');
         }
     }
-
     // Edit a specific item
     public function articlesMember(): string
     {
         $articleManager = new ArticleManager();
         $articles = $articleManager->selectAll('id');
-
         return $this->twig->render('Article/index.html.twig', ['articles' => $articles,
         ]);
     }

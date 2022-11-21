@@ -4,12 +4,9 @@ namespace App\Controller;
 
 use App\Model\ArticleManager;
 use App\Model\UserManager;
-use JasonGrimes\Paginator;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Request\Manga\MangaRequest;
 use Jikan\Request\Top\TopMangaRequest;
-use Pagerfanta\Adapter\ArrayAdapter;
-use Pagerfanta\Pagerfanta;
 
 class MangaController extends AbstractController
 {
@@ -34,39 +31,8 @@ class MangaController extends AbstractController
 
         $manga = $topManga->getResults();
 
-        $adapter = new ArrayAdapter($manga);
-
-        $pagerfanta = new Pagerfanta($adapter);
-
-        // pagination
-
-        $totalItems = 1000;
-
-        $itemsPerPage = 10;
-
-        $currentPage = 8;
-        $urlPattern = '/foo/page/(:num)';
-
-        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
-
-        $num = $paginator->getPages();
-
-        // end pagination
-
-        $maxPerPage = 10;
-        $pagerfanta->setMaxPerPage($maxPerPage); // 10 by default
-        $maxPerPage = $pagerfanta->getMaxPerPage();
-        $pagerfanta->setCurrentPage($currentPage); // 1 by default
-        $currentPage = $pagerfanta->getCurrentPage();
-
-        $nbResults = $pagerfanta->getNbResults();
-        $currentPageResults = $pagerfanta->getCurrentPageResults();
-
         return $this->twig->render('Manga/manga.html.twig', ['manga_list' => $manga,
             'article' => $articles,
-            'paginator' => $paginator,
-            'num' => $num,
-            'pagerfunta' => $pagerfanta,
         ]);
     }
 

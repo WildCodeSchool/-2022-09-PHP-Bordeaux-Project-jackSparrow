@@ -1,7 +1,6 @@
 {% extends "layout.html.twig" %}
 {% block title %}
-	{{parent()}}|
-	{{anime_show.title}}
+	Anime
 {% endblock %}
 
 
@@ -73,7 +72,6 @@
 					<h4 class="d-flex row background-ws-light title m-2 text-center rounded">no video</h4>
 				{% endif %}
 
-				{% include "_Component/_comments.html.twig" %}
 
 				{% include "_Component/_stream_episode.html.twig" %}
 			</div>
