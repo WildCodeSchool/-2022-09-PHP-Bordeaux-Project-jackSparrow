@@ -61,7 +61,7 @@
 			<div class="col-12 col-xl-6">
 				{% if anime_show.trailer.embedUrl == true %}
 
-					<div class="embed-responsive row  background-ws-light rounded m-2 p-2 embed-responsive-1by1">
+					<div class="embed-responsive row  background-ws-light rounded m-2 p-2 embed-responsive-1by1 h-50">
 						<iframe class="embed-responsive-item" src="{{anime_show.trailer.embedUrl }}" alt="{{anime_show.trailer.embedUrl ? anime_show.trailer.embedUrl : "no video" }}"></iframe>
 
 
@@ -69,7 +69,7 @@
 
 
 				{% else %}
-					<h4 class="d-flex row background-ws-light title m-2 text-center rounded">no video</h4>
+					<h4 class="d-flex row background-ws-light title m-2 text-center rounded">No video available</h4>
 				{% endif %}
 
 
