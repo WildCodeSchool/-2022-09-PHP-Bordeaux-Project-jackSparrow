@@ -53,7 +53,7 @@ class UserController extends AbstractController
 
             $_SESSION['user_id'] = $lastUserId;
 
-            $_SESSION['status'] = 'welcome to supra manga site powaa';
+            $_SESSION['status'] = 'Welcome to our website about your favorite mangas';
             header('Location:/member/user_profile?id='.$lastUserId);
 
             return null;

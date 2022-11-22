@@ -66,12 +66,8 @@ then, run it to open it on your localhost :
 docker run -i -t --name simple-mvc  -p 80:80 simple-mvc-container
 ```
 
-## Fictional User
+## Create a fictional administrator
 
-With the ``dump.sql``, you have a fictional user who is an administrator.
+Firstly create a user with name, email, password after that go on your database and change manually the field isAdmin, write 1 instead of 0.
 
-With this user you can try many features which aren't available with a user who isn't administrator
-
-Mail : jean@jean.fr
-
-Password : jean
+You can go on your profile user, and you will see features who are only for administrator.
