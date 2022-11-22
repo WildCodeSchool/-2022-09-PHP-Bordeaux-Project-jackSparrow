@@ -1,5 +1,5 @@
 CREATE DATABASE blog_manga;
-USE blog_mangaka;
+USE blog_manga;
 
 create table categories
 (
@@ -14,7 +14,7 @@ create table users
         primary key,
     name     varchar(100)         null,
     password varchar(100)         null,
-    mail     varchar(255)         null,
+    mail     varchar(255)         null ,
     isAdmin  tinyint(1) default 0 null,
     date     date                 null
 );
@@ -51,5 +51,4 @@ create table comments
         foreign key (users_id) references users (id)
 );
 
-INSERT INTO users (name, password, mail, isAdmin, date) VALUES ('jean', 'jean', 'jean@jean.fr', 1, now());
 
